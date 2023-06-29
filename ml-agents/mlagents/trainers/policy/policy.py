@@ -45,7 +45,7 @@ class Policy:
         :param num_agents: Number of agents.
         :return: Numpy array of zeros.
         """
-        return np.zeros((num_agents, self.m_size), dtype=np.float32)
+        return np.zeros((num_agents, self.m_size), dtype=float)
 
     def save_memories(
         self, agent_ids: List[GlobalAgentId], memory_matrix: Optional[np.ndarray]
@@ -62,14 +62,14 @@ class Policy:
             self.memory_dict[agent_id] = memory_matrix[index, :]
 
     def retrieve_memories(self, agent_ids: List[GlobalAgentId]) -> np.ndarray:
-        memory_matrix = np.zeros((len(agent_ids), self.m_size), dtype=np.float32)
+        memory_matrix = np.zeros((len(agent_ids), self.m_size), dtype=float)
         for index, agent_id in enumerate(agent_ids):
             if agent_id in self.memory_dict:
                 memory_matrix[index, :] = self.memory_dict[agent_id]
         return memory_matrix
 
     def retrieve_previous_memories(self, agent_ids: List[GlobalAgentId]) -> np.ndarray:
-        memory_matrix = np.zeros((len(agent_ids), self.m_size), dtype=np.float32)
+        memory_matrix = np.zeros((len(agent_ids), self.m_size), dtype=float)
         for index, agent_id in enumerate(agent_ids):
             if agent_id in self.previous_memory_dict:
                 memory_matrix[index, :] = self.previous_memory_dict[agent_id]

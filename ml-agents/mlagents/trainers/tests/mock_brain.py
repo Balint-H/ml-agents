@@ -34,7 +34,7 @@ def create_mock_steps(
     """
     obs_list = []
     for obs_spec in observation_specs:
-        obs_list.append(np.ones((num_agents,) + obs_spec.shape, dtype=np.float32))
+        obs_list.append(np.ones((num_agents,) + obs_spec.shape, dtype=float))
     action_mask = None
     if action_spec.is_discrete():
         action_mask = [
@@ -42,7 +42,7 @@ def create_mock_steps(
             for action_size in action_spec.discrete_branches  # type: ignore
         ]  # type: ignore
 
-    reward = np.array(num_agents * [1.0], dtype=np.float32)
+    reward = np.array(num_agents * [1.0], dtype=float)
     interrupted = np.array(num_agents * [False], dtype=np.bool)
     if agent_ids is not None:
         agent_id = np.array(agent_ids, dtype=np.int32)
@@ -50,7 +50,7 @@ def create_mock_steps(
         agent_id = np.arange(num_agents, dtype=np.int32)
     _gid = 1 if grouped else 0
     group_id = np.array(num_agents * [_gid], dtype=np.int32)
-    group_reward = np.array(num_agents * [0.0], dtype=np.float32)
+    group_reward = np.array(num_agents * [0.0], dtype=float)
     behavior_spec = BehaviorSpec(observation_specs, action_spec)
     if done:
         return (
@@ -99,16 +99,16 @@ def make_fake_trajectory(
     for _i in range(length - 1):
         obs = []
         for obs_spec in observation_specs:
-            obs.append(np.ones(obs_spec.shape, dtype=np.float32))
+            obs.append(np.ones(obs_spec.shape, dtype=float))
         reward = 1.0
         done = False
         action = ActionTuple(
-            continuous=np.zeros(action_spec.continuous_size, dtype=np.float32),
+            continuous=np.zeros(action_spec.continuous_size, dtype=float),
             discrete=np.zeros(action_spec.discrete_size, dtype=np.int32),
         )
         action_probs = LogProbsTuple(
-            continuous=np.ones(action_spec.continuous_size, dtype=np.float32),
-            discrete=np.ones(action_spec.discrete_size, dtype=np.float32),
+            continuous=np.ones(action_spec.continuous_size, dtype=float),
+            discrete=np.ones(action_spec.discrete_size, dtype=float),
         )
         action_mask = (
             [
@@ -121,10 +121,10 @@ def make_fake_trajectory(
         if action_spec.is_discrete():
             prev_action = np.ones(action_size, dtype=np.int32)
         else:
-            prev_action = np.ones(action_size, dtype=np.float32)
+            prev_action = np.ones(action_size, dtype=float)
 
         max_step = False
-        memory = np.ones(memory_size, dtype=np.float32)
+        memory = np.ones(memory_size, dtype=float)
         agent_id = "test_agent"
         behavior_id = "test_brain?team=" + str(team_id)
         group_status = []
@@ -146,7 +146,7 @@ def make_fake_trajectory(
         steps_list.append(experience)
     obs = []
     for obs_spec in observation_specs:
-        obs.append(np.ones(obs_spec.shape, dtype=np.float32))
+        obs.append(np.ones(obs_spec.shape, dtype=float))
     last_group_status = []
     for _ in range(num_other_agents_in_group):
         last_group_status.append(

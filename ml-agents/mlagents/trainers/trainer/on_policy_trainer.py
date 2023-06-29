@@ -86,7 +86,7 @@ class OnPolicyTrainer(RLTrainer):
         )
 
         advantages = np.array(
-            self.update_buffer[BufferKey.ADVANTAGES].get_batch(), dtype=np.float32
+            self.update_buffer[BufferKey.ADVANTAGES].get_batch(), dtype=float
         )
         self.update_buffer[BufferKey.ADVANTAGES].set(
             (advantages - advantages.mean()) / (advantages.std() + 1e-10)

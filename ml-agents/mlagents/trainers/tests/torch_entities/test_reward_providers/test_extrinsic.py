@@ -79,7 +79,7 @@ def test_reward(behavior_spec: BehaviorSpec, reward: float) -> None:
     buffer[BufferKey.GROUP_REWARD] = buffer[BufferKey.ENVIRONMENT_REWARDS]
     # 2 agents with identical rewards
     buffer[BufferKey.GROUPMATE_REWARDS].set(
-        [np.ones(1, dtype=np.float32) * reward] * 2
+        [np.ones(1, dtype=float) * reward] * 2
         for _ in range(buffer.num_experiences)
     )
     generated_rewards = extrinsic_rp.evaluate(buffer)

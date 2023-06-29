@@ -42,14 +42,14 @@ def make_demo_buffer(
         )
         previous_action = (
             np.array(
-                pair_infos[idx].action_info.vector_actions_deprecated, dtype=np.float32
+                pair_infos[idx].action_info.vector_actions_deprecated, dtype=float
             )
             * 0
         )
         if idx > 0:
             previous_action = np.array(
                 pair_infos[idx - 1].action_info.vector_actions_deprecated,
-                dtype=np.float32,
+                dtype=float,
             )
 
         next_done = len(next_terminal_step) == 1

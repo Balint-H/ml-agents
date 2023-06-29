@@ -129,11 +129,11 @@ class SimpleEnvironment(BaseEnv):
     def _make_obs(self, value: float) -> List[np.ndarray]:
         obs = []
         for _ in range(self.num_vector):
-            obs.append(np.ones((1, self.vec_obs_size), dtype=np.float32) * value)
+            obs.append(np.ones((1, self.vec_obs_size), dtype=float) * value)
         for _ in range(self.num_visual):
-            obs.append(np.ones((1,) + self.vis_obs_size, dtype=np.float32) * value)
+            obs.append(np.ones((1,) + self.vis_obs_size, dtype=float) * value)
         for _ in range(self.num_var_len):
-            obs.append(np.ones((1,) + self.var_len_obs_size, dtype=np.float32) * value)
+            obs.append(np.ones((1,) + self.var_len_obs_size, dtype=float) * value)
         return obs
 
     @property
@@ -203,10 +203,10 @@ class SimpleEnvironment(BaseEnv):
         self, name: str, done: bool, reward: float, group_reward: float
     ) -> Tuple[DecisionSteps, TerminalSteps]:
         m_vector_obs = self._make_obs(self.goal[name])
-        m_reward = np.array([reward], dtype=np.float32)
+        m_reward = np.array([reward], dtype=float)
         m_agent_id = np.array([self.agent_id[name]], dtype=np.int32)
         m_group_id = np.array([0], dtype=np.int32)
-        m_group_reward = np.array([group_reward], dtype=np.float32)
+        m_group_reward = np.array([group_reward], dtype=float)
         action_mask = self._generate_mask()
         decision_step = DecisionSteps(
             m_vector_obs, m_reward, m_agent_id, action_mask, m_group_id, m_group_reward
@@ -246,12 +246,12 @@ class SimpleEnvironment(BaseEnv):
     def _construct_reset_step(
         self, name: str
     ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
-        new_reward = np.array([0.0], dtype=np.float32)
+        new_reward = np.array([0.0], dtype=float)
         new_done = np.array([False], dtype=np.bool)
         new_agent_id = np.array([self.agent_id[name]], dtype=np.int32)
         new_action_mask = self._generate_mask()
         new_group_id = np.array([0], dtype=np.int32)
-        new_group_reward = np.array([0.0], dtype=np.float32)
+        new_group_reward = np.array([0.0], dtype=float)
         return (
             new_reward,
             new_done,
@@ -297,10 +297,10 @@ class MemoryEnvironment(SimpleEnvironment):
             self.goal[name] if self.step_count[name] <= self.num_show_steps else 0
         )
         m_vector_obs = self._make_obs(recurrent_obs_val)
-        m_reward = np.array([reward], dtype=np.float32)
+        m_reward = np.array([reward], dtype=float)
         m_agent_id = np.array([self.agent_id[name]], dtype=np.int32)
         m_group_id = np.array([0], dtype=np.int32)
-        m_group_reward = np.array([group_reward], dtype=np.float32)
+        m_group_reward = np.array([group_reward], dtype=float)
         action_mask = self._generate_mask()
         decision_step = DecisionSteps(
             m_vector_obs, m_reward, m_agent_id, action_mask, m_group_id, m_group_reward
@@ -599,14 +599,14 @@ class RecordEnvironment(SimpleEnvironment):
             for name in self.names:
                 if self.action_spec.discrete_size > 0:
                     self.action[name] = ActionTuple(
-                        np.array([], dtype=np.float32),
+                        np.array([], dtype=float),
                         np.array(
                             [[1]] if self.goal[name] > 0 else [[0]], dtype=np.int32
                         ),
                     )
                 else:
                     self.action[name] = ActionTuple(
-                        np.array([[float(self.goal[name])]], dtype=np.float32),
+                        np.array([[float(self.goal[name])]], dtype=float),
                         np.array([], dtype=np.int32),
                     )
             self.step()

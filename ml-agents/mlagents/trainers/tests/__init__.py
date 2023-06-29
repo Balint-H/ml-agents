@@ -25,7 +25,7 @@ if os.getenv("TEST_ENFORCE_NUMPY_FLOAT32"):
                 or "ml-agents-envs/mlagents" in filename
             ):
                 raise ValueError(
-                    f"float64 array created. Set dtype=np.float32 instead of current dtype={kwargs_dtype}. "
+                    f"float64 array created. Set dtype=float instead of current dtype={kwargs_dtype}. "
                     f"Run pytest with TEST_ENFORCE_NUMPY_FLOAT32=1 to confirm fix."
                 )
 

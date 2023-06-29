@@ -140,7 +140,7 @@ class POCATrainer(OnPolicyTrainer):
 
             local_rewards = np.array(
                 agent_buffer_trajectory[RewardSignalUtil.rewards_key(name)].get_batch(),
-                dtype=np.float32,
+                dtype=float,
             )
 
             baseline_estimate = agent_buffer_trajectory[
@@ -170,7 +170,7 @@ class POCATrainer(OnPolicyTrainer):
 
         # Get global advantages
         global_advantages = list(
-            np.mean(np.array(tmp_advantages, dtype=np.float32), axis=0)
+            np.mean(np.array(tmp_advantages, dtype=float), axis=0)
         )
         agent_buffer_trajectory[BufferKey.ADVANTAGES].set(global_advantages)
 

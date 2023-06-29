@@ -21,7 +21,7 @@ class LogProbsTuple(_ActionTupleBase):
         """
         The dtype of a discrete log probability.
         """
-        return np.float32
+        return float
 
     @staticmethod
     def empty_log_probs() -> "LogProbsTuple":

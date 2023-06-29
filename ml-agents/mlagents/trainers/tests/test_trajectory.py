@@ -65,10 +65,10 @@ def test_obsutil_group_from_buffer():
     buff = AgentBuffer()
     # Create some obs
     for _ in range(3):
-        buff[GroupObsUtil.get_name_at(0)].append(3 * [np.ones((5,), dtype=np.float32)])
+        buff[GroupObsUtil.get_name_at(0)].append(3 * [np.ones((5,), dtype=float)])
     # Some agents have died
     for _ in range(2):
-        buff[GroupObsUtil.get_name_at(0)].append(1 * [np.ones((5,), dtype=np.float32)])
+        buff[GroupObsUtil.get_name_at(0)].append(1 * [np.ones((5,), dtype=float)])
 
     # Get the group obs, which will be a List of Lists of np.ndarray, where each element is the same
     # length as the AgentBuffer but contains only one agent's obs. Dead agents are padded by

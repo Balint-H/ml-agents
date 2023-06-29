@@ -152,9 +152,9 @@ class PPOTrainer(OnPolicyTrainer):
 
         # Get global advantages
         global_advantages = list(
-            np.mean(np.array(tmp_advantages, dtype=np.float32), axis=0)
+            np.mean(np.array(tmp_advantages, dtype=float), axis=0)
         )
-        global_returns = list(np.mean(np.array(tmp_returns, dtype=np.float32), axis=0))
+        global_returns = list(np.mean(np.array(tmp_returns, dtype=float), axis=0))
         agent_buffer_trajectory[BufferKey.ADVANTAGES].set(global_advantages)
         agent_buffer_trajectory[BufferKey.DISCOUNTED_RETURNS].set(global_returns)
 

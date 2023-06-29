@@ -10,18 +10,18 @@ def test_agent_action_group_from_buffer():
     # Create some actions
     for _ in range(3):
         buff[BufferKey.GROUP_CONTINUOUS_ACTION].append(
-            3 * [np.ones((5,), dtype=np.float32)]
+            3 * [np.ones((5,), dtype=float)]
         )
         buff[BufferKey.GROUP_DISCRETE_ACTION].append(
-            3 * [np.ones((4,), dtype=np.float32)]
+            3 * [np.ones((4,), dtype=float)]
         )
     # Some agents have died
     for _ in range(2):
         buff[BufferKey.GROUP_CONTINUOUS_ACTION].append(
-            1 * [np.ones((5,), dtype=np.float32)]
+            1 * [np.ones((5,), dtype=float)]
         )
         buff[BufferKey.GROUP_DISCRETE_ACTION].append(
-            1 * [np.ones((4,), dtype=np.float32)]
+            1 * [np.ones((4,), dtype=float)]
         )
 
     # Get the group actions, which will be a List of Lists of AgentAction, where each element is the same

@@ -178,7 +178,7 @@ class AgentBufferField(list):
                     padding = []
                 else:
                     # We want to duplicate the last value in the array, multiplied by the padding_value.
-                    padding = np.array(self[-1], dtype=np.float32) * self.padding_value
+                    padding = np.array(self[-1], dtype=float) * self.padding_value
                 return self[:] + [padding] * (training_length - leftover)
 
             else:
@@ -207,7 +207,7 @@ class AgentBufferField(list):
         self[:] = []
 
     def padded_to_batch(
-        self, pad_value: np.float = 0, dtype: np.dtype = np.float32
+        self, pad_value: float = 0, dtype: np.dtype = float
     ) -> Union[np.ndarray, List[np.ndarray]]:
         """
         Converts this AgentBufferField (which is a List[BufferEntry]) into a numpy array

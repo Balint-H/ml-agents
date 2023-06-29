@@ -9,11 +9,11 @@ def create_agent_buffer(
 ) -> AgentBuffer:
     buffer = AgentBuffer()
     curr_obs = [
-        np.random.normal(size=obs_spec.shape).astype(np.float32)
+        np.random.normal(size=obs_spec.shape).astype(float)
         for obs_spec in behavior_spec.observation_specs
     ]
     next_obs = [
-        np.random.normal(size=obs_spec.shape).astype(np.float32)
+        np.random.normal(size=obs_spec.shape).astype(float)
         for obs_spec in behavior_spec.observation_specs
     ]
     action_buffer = behavior_spec.action_spec.random_action(1)
@@ -34,8 +34,8 @@ def create_agent_buffer(
             buffer[_act_type].append(_act[0, :])
         # TODO was "rewards"
         buffer[BufferKey.ENVIRONMENT_REWARDS].append(
-            np.ones(1, dtype=np.float32) * reward
+            np.ones(1, dtype=float) * reward
         )
-        buffer[BufferKey.MASKS].append(np.ones(1, dtype=np.float32))
-    buffer[BufferKey.DONE] = np.zeros(number, dtype=np.float32)
+        buffer[BufferKey.MASKS].append(np.ones(1, dtype=float))
+    buffer[BufferKey.DONE] = np.zeros(number, dtype=float)
     return buffer

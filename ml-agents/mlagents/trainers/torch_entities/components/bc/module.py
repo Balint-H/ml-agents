@@ -160,7 +160,7 @@ class BCModule:
                         self.n_sequences * self.policy.sequence_length,
                         sum(self.policy.behavior_spec.action_spec.discrete_branches),
                     ),
-                    dtype=np.float32,
+                    dtype=float,
                 )
             )
 

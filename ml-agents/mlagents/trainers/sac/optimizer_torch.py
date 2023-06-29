@@ -192,10 +192,10 @@ class TorchSACOptimizer(TorchOptimizer):
         _cont_target = (
             -1
             * self.continuous_target_entropy_scale
-            * np.prod(self._action_spec.continuous_size).astype(np.float32)
+            * np.prod(self._action_spec.continuous_size).astype(float)
         )
         _disc_target = [
-            self.discrete_target_entropy_scale * np.log(i).astype(np.float32)
+            self.discrete_target_entropy_scale * np.log(i).astype(float)
             for i in self._action_spec.discrete_branches
         ]
         self.target_entropy = TorchSACOptimizer.TargetEntropy(

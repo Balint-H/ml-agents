@@ -281,7 +281,7 @@ class Trajectory(NamedTuple):
 
                 action_shape = exp.action.discrete.shape
                 agent_buffer_trajectory[BufferKey.ACTION_MASK].append(
-                    np.ones(action_shape, dtype=np.float32), padding_value=1
+                    np.ones(action_shape, dtype=float), padding_value=1
                 )
             agent_buffer_trajectory[BufferKey.PREV_ACTION].append(exp.prev_action)
             agent_buffer_trajectory[BufferKey.ENVIRONMENT_REWARDS].append(exp.reward)
